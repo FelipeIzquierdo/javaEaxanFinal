@@ -65,9 +65,14 @@ public class StudentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        readFile();
         
-        processRequest(request, response);
+        FileStudent fileStudent = new FileStudent();
+        Collection students = fileStudent.getStudents(); 
+        
+        request.setAttribute("students", students);
+        RequestDispatcher rd = request.getRequestDispatcher("table_students.jsp");
+        rd.forward(request, response);
+
     }
 
     /**
@@ -89,14 +94,8 @@ public class StudentController extends HttpServlet {
         String address = request.getParameter("address");
         String city = request.getParameter("city");
         
-        StudentVOVw vo = new StudentVOVw();
-        vo.setStudentName(name);
-        vo.setAddress(address);
-        vo.setCity(city);
-        vo.setEmail(email);
-        vo.setPhone(phone);
-        vo.setId(id);
-        writeFile(vo);
+        StudentVOVw vo = new StudentVOVw(id, name, address, city, email, phone);
+        FileStudent fileStudent = new FileStudent(vo);
         request.setAttribute("student", vo);
         
         RequestDispatcher rd = request.getRequestDispatcher("view_student.jsp");
@@ -112,69 +111,4 @@ public class StudentController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    public void writeFile(StudentVOVw student){ 
-    
-        FileWriter fichero = null;
-        PrintWriter pw = null;
-        try
-        {            
-            fichero = new FileWriter("c:/ficheros/dbstudents.txt", true);
-            pw = new PrintWriter(fichero);
-            pw.println(student.getId()); 
-            pw.println(student.getStudentName());
-            pw.println(student.getAddress());
-            pw.println(student.getCity());
-            pw.println(student.getEmail());
-            pw.println(student.getPhone());
-            pw.println("--end--");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-           try {
-
-           if (null != fichero)
-              fichero.close();
-           } catch (Exception e2) {
-              e2.printStackTrace();
-           }
-        }               
-    }
-    
-    public  Collection readFile() {
-       Collection students = new ArrayList<String>(); 
-      File archivo = null;
-      FileReader fr = null;
-      BufferedReader br = null;
- 
-      try {
-         // Apertura del fichero y creacion de BufferedReader para poder
-         // hacer una lectura comoda (disponer del metodo readLine()).
-         archivo = new File ("c:/ficheros/dbstudents.txt");
-         fr = new FileReader (archivo);
-         br = new BufferedReader(fr);
- 
-         // Lectura del fichero
-         String linea;
-         while((linea=br.readLine())!=null)
-             
-            System.out.println(linea);
-      }
-      catch(Exception e){
-         e.printStackTrace();
-      }finally{
-         // En el finally cerramos el fichero, para asegurarnos
-         // que se cierra tanto si todo va bien como si salta 
-         // una excepcion.
-         try{                    
-            if( null != fr ){   
-               fr.close();     
-            }                  
-         }catch (Exception e2){ 
-            e2.printStackTrace();
-         }
-      }
-        return null;
-   }
 }

@@ -9,21 +9,24 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="/finalExamPA2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/finalExamPA2/css/style.css">
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="student" scope="request" class="jspa.view.vo.StudentVOVw" />
-        <label>Nombre:</label> <jsp:getProperty name="student" property="studentName" />
-        <label>id:</label> <jsp:getProperty name="student" property="id" />
-        <label>tel:</label> <jsp:getProperty name="student" property="phone" />
-        <label>email:</label> <jsp:getProperty name="student" property="email" />
-        <label>dir:</label> <jsp:getProperty name="student" property="address" />
-        <label>ciudad:</label> <jsp:getProperty name="student" property="city" />
-        <div>
-            <form method="GET" action="StudentController">
-                <input type="submit" value="Ver Estudiantes"/>
-            </form>
+        <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+            <h1 class="title-page">Usuario Registrado</h1>
+            <jsp:useBean id="student" scope="request" class="jspa.view.vo.StudentVOVw" />
+            <dl class="dl-horizontal">
+                <dt>Nombre:</dt> <dd><jsp:getProperty name="student" property="studentName" /></dd>
+                <dt>id:</dt> <dd><jsp:getProperty name="student" property="id" /></dd>
+                <dt>tel:</dt> <dd><jsp:getProperty name="student" property="phone" /></dd>
+                <dt>email:</dt> <dd><jsp:getProperty name="student" property="email" /></dd>
+                <dt>dir:</dt> <dd><jsp:getProperty name="student" property="address" /></dd>
+                <dt>ciudad:</dt> <dd><jsp:getProperty name="student" property="city" /></dd>
+            </dl>
+            
+            <a class="btn btn-info" href="/finalExamPA2/StudentController">Ver Usuarios</a>
         </div>
-    
     </body>
 </html>

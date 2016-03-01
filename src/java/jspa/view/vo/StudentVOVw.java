@@ -17,7 +17,18 @@ public class StudentVOVw   {
     private String email; 
     private String address;
     private String city;
-
+    
+    public StudentVOVw(){}
+    
+    public StudentVOVw(String id, String studentName, String address, String city, String email, String phone) {
+        this.studentName = studentName;
+        this.id = id;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.city = city;
+    }
+    
     public String getStudentName() {
         return studentName;
     }

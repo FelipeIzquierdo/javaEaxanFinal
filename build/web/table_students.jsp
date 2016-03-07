@@ -21,22 +21,28 @@
                 <thead>
                     <tr>
                         <th>Id</th>
+                        <th>Identificación</th>
                         <th>Nombre</th>
-                        <th>Dirección</th>
-                        <th>ciudad</th>
                         <th>Email</th>
                         <th>Tel</th>
+                        <th>Dirección</th>
+                        <th>ciudad</th>
+                        <th>Programa</th>
+                        
                     </tr>
                 </thead>
                 <c:forEach var="student" items="${students}"> 
                     <tbody>
                         <tr>
                             <td>${student.getId()}</td>
-                            <td>${student.getStudentName()}</td>
-                            <td>${student.getAddress()}</td>
-                            <td>${student.getCity()}</td>
+                            <td>${student.getIdentification()}</td>
+                            <td>${student.getName()}</td>
                             <td>${student.getEmail()}</td>
                             <td>${student.getPhone()}</td>
+                            <td>${student.getAddressVO().getStreet()}</td>
+                            <td>${student.getAddressVO().getCity()}</td>
+                            <td>${student.getProgramVO().getName()}</td>
+                            
                         </tr>
                     </tbody>
                  </c:forEach>

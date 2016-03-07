@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import jspa.view.vo.StudentVOVw;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,7 +30,7 @@ public class FileStudent {
     public FileStudent() {
     }
     
-    public FileStudent(StudentVOVw student) {
+   /* public FileStudent(StudentVOVw student) {
         this.writeFile(student);
     }
     
@@ -49,7 +48,7 @@ public class FileStudent {
 
     public Collection getStudents() {
         this.readFile();
-        return students;
+        return this.students;
     }
     
     private void readFile() {
@@ -123,5 +122,5 @@ public class FileStudent {
              e2.printStackTrace();
           }
        }               
-    }
+    }*/
 }

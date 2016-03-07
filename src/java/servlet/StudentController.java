@@ -1,16 +1,13 @@
+package servlet;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Collection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +15,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jspa.view.vo.StudentVOVw;
+import services.StudentsServices;
+import vo.AddressVO;
+import vo.ProgramVO;
+import vo.StudentVO;
 
 /**
  *
@@ -66,10 +66,9 @@ public class StudentController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        FileStudent fileStudent = new FileStudent();
-        Collection students = fileStudent.getStudents(); 
-        
-        request.setAttribute("students", students);
+        StudentsServices service = new StudentsServices();
+        Collection<StudentVO> studentsVO = service.allStudents();
+        request.setAttribute("students", studentsVO);
         RequestDispatcher rd = request.getRequestDispatcher("table_students.jsp");
         rd.forward(request, response);
 
@@ -88,15 +87,20 @@ public class StudentController extends HttpServlet {
             throws ServletException, IOException {
         
         String name = request.getParameter("studentName");
-        String id = request.getParameter("id");
+        String identification = request.getParameter("id");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
-        String address = request.getParameter("address");
+        String street = request.getParameter("street");
         String city = request.getParameter("city");
+        String program = request.getParameter("programName");
         
-        StudentVOVw vo = new StudentVOVw(id, name, address, city, email, phone);
-        FileStudent fileStudent = new FileStudent(vo);
-        request.setAttribute("student", vo);
+        AddressVO addressVO = new AddressVO(street, city);
+        ProgramVO programVO = new ProgramVO(program);
+        StudentVO studentVO = new StudentVO(name, identification, phone, email, addressVO, programVO);
+        
+        StudentsServices service = new StudentsServices();
+        service.newStudent(studentVO);
+        request.setAttribute("student", studentVO);
         
         RequestDispatcher rd = request.getRequestDispatcher("view_student.jsp");
         rd.forward(request, response);

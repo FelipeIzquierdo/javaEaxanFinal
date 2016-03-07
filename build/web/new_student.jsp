@@ -18,42 +18,48 @@
             <h1 class="title-page">Datos de Usuario</h1>
             <form method="POST" action="StudentController" class="form-horizontal">
                 <div class="form-group">
-                    <label class="col-sm-1 control-label">Id</label>
-                    <div class="col-sm-11">
+                    <label class="col-sm-2 control-label">Identificación</label>
+                    <div class="col-sm-10">
                         <input class="form-control" type="text" name="id" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-1 control-label">Nombre</label>
-                    <div class="col-sm-11">
+                    <label class="col-sm-2 control-label">Nombre</label>
+                    <div class="col-sm-10">
                         <input class="form-control" type="text" name="studentName" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-1 control-label">Teléfono</label>
-                    <div class="col-sm-11">
+                    <label class="col-sm-2 control-label">Teléfono</label>
+                    <div class="col-sm-10">
                         <input class="form-control" type="text" name="phone" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-1 control-label">Email</label>
-                    <div class="col-sm-11">
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
                         <input class="form-control" type="email" name="email" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-1 control-label">Dirección</label>
-                    <div class="col-sm-11">
-                        <input class="form-control" type="text" name="address" value=""/>
+                    <label class="col-sm-2 control-label">Dirección</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" name="street" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-1 control-label">Ciudad</label>
-                    <div class="col-sm-11">
+                    <label class="col-sm-2 control-label">Ciudad</label>
+                    <div class="col-sm-10">
                         <input class="form-control" type="text" name="city" value=""/>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-info col-sm-offset-1" value="Crear Usuario"/>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Programa</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" name="programName" value=""/>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-info col-sm-offset-2" value="Crear Usuario"/>
             </form>
         </div> 
     </body>

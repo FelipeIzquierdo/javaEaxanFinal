@@ -16,14 +16,15 @@
     <body>
         <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
             <h1 class="title-page">Usuario Registrado</h1>
-            <jsp:useBean id="student" scope="request" class="jspa.view.vo.StudentVOVw" />
+
             <dl class="dl-horizontal">
-                <dt>Nombre:</dt> <dd><jsp:getProperty name="student" property="studentName" /></dd>
-                <dt>id:</dt> <dd><jsp:getProperty name="student" property="id" /></dd>
-                <dt>tel:</dt> <dd><jsp:getProperty name="student" property="phone" /></dd>
-                <dt>email:</dt> <dd><jsp:getProperty name="student" property="email" /></dd>
-                <dt>dir:</dt> <dd><jsp:getProperty name="student" property="address" /></dd>
-                <dt>ciudad:</dt> <dd><jsp:getProperty name="student" property="city" /></dd>
+                <dt>Identificación:</dt> <dd>${requestScope.student.identification}</dd>
+                <dt>Nombre:</dt> <dd>${requestScope.student.name}</dd>
+                <dt>Tel:</dt> <dd>${requestScope.student.phone}</dd>
+                <dt>Email:</dt> <dd>${requestScope.student.email}</dd>
+                <dt>Ciudad</dt> <dd>${requestScope.student.addressVO.city}</dd>
+                <dt>Calle</dt> <dd>${requestScope.student.addressVO.street}</dd>
+                <dt>Programa</dt> <dd>${requestScope.student.programVO.name}</dd>
             </dl>
             
             <a class="btn btn-info" href="/finalExamPA2/StudentController">Ver Usuarios</a>

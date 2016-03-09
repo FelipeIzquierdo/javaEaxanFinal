@@ -9,8 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="/finalExamPA2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/finalExamPA2/css/style.css">
+        <link rel="stylesheet" href="/JSPLap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/JSPLap/css/style.css">
         <title>JSP Page</title>
     </head>
     <body>
@@ -18,6 +18,7 @@
             <h1 class="title-page">Usuario Registrado</h1>
 
             <dl class="dl-horizontal">
+                <dt>Id:</dt> <dd>${requestScope.student.id}</dd>
                 <dt>Identificación:</dt> <dd>${requestScope.student.identification}</dd>
                 <dt>Nombre:</dt> <dd>${requestScope.student.name}</dd>
                 <dt>Tel:</dt> <dd>${requestScope.student.phone}</dd>
@@ -26,8 +27,9 @@
                 <dt>Calle</dt> <dd>${requestScope.student.addressVO.street}</dd>
                 <dt>Programa</dt> <dd>${requestScope.student.programVO.name}</dd>
             </dl>
+            <a class="btn btn-info" href="/JSPLap/StudentController?funcion=1&id=${requestScope.student.id}">Editar Estudiente</a>
+            <a class="btn btn-info" href="/JSPLap/StudentController?funcion=2">Ver Estudientes</a>
             
-            <a class="btn btn-info" href="/finalExamPA2/StudentController">Ver Usuarios</a>
         </div>
     </body>
 </html>

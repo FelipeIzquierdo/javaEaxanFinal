@@ -9,13 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="/finalExamPA2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/finalExamPA2/css/style.css">
-        <title>Crear nuevo Usuario</title>
+        <link rel="stylesheet" href="/JSPLap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/JSPLap/css/style.css">
+        <title>Crear nuevo Estudiente</title>
     </head>
     <body>
         <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
-            <h1 class="title-page">Datos de Usuario</h1>
+            <h1 class="title-page">Datos de Estudiente</h1>
             <form method="POST" action="StudentController" class="form-horizontal">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Identificación</label>
@@ -59,7 +59,8 @@
                         <input class="form-control" type="text" name="programName" value=""/>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-info col-sm-offset-2" value="Crear Usuario"/>
+                <input type="hidden" name="funcion" value="1">
+                <input type="submit" class="btn btn-info col-sm-offset-2" value="Crear Estudiente"/>
             </form>
         </div> 
     </body>

@@ -10,13 +10,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="/finalExamPA2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/finalExamPA2/css/style.css">
-        <title>Ver Usuarios</title>
+        <link rel="stylesheet" href="/JSPLap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/JSPLap/css/style.css">
+        <title>Ver Estudientes</title>
     </head>
     <body>
         <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
-            <h1 class="title-page">Lista de Usuarios</h1>
+            <h1 class="title-page">Lista de Estudientes</h1>
             <table class="table table-hover">
                 <thead>
                     <tr>

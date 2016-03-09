@@ -8,6 +8,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import java.util.Collection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -69,8 +70,21 @@ public class StudentController extends HttpServlet {
         StudentsServices service = new StudentsServices();
         Collection<StudentVO> studentsVO = service.allStudents();
         request.setAttribute("students", studentsVO);
-        RequestDispatcher rd = request.getRequestDispatcher("table_students.jsp");
-        rd.forward(request, response);
+        int funcion =parseInt(request.getParameter("funcion"));
+        switch(funcion) {
+                   case 1:
+                       Long id = new Long(request.getParameter("id"));
+                       StudentVO studentVO = service.findStudent(id);
+                       request.setAttribute("student", studentVO);
+                       RequestDispatcher rd = request.getRequestDispatcher("update_student.jsp");
+                       rd.forward(request, response);
+                   break;
+                   case 2:
+                       rd = request.getRequestDispatcher("table_students.jsp");
+                       rd.forward(request, response);
+                   break;
+        }
+        
 
     }
 
@@ -85,26 +99,106 @@ public class StudentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String name = request.getParameter("studentName");
-        String identification = request.getParameter("id");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        String street = request.getParameter("street");
-        String city = request.getParameter("city");
-        String program = request.getParameter("programName");
-        
-        AddressVO addressVO = new AddressVO(street, city);
-        ProgramVO programVO = new ProgramVO(program);
-        StudentVO studentVO = new StudentVO(name, identification, phone, email, addressVO, programVO);
-        
+        int funcion =parseInt(request.getParameter("funcion"));        
         StudentsServices service = new StudentsServices();
-        service.newStudent(studentVO);
-        request.setAttribute("student", studentVO);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("view_student.jsp");
-        rd.forward(request, response);
+        switch(funcion) {
+                   case 1:   
+                        String name = request.getParameter("studentName");
+                        String identification = request.getParameter("id");
+                        String phone = request.getParameter("phone");
+                        String email = request.getParameter("email");
+                        String street = request.getParameter("street");
+                        String city = request.getParameter("city");
+                        String program = request.getParameter("programName");
+
+                        AddressVO addressVO = new AddressVO(street, city);
+                        ProgramVO programVO = new ProgramVO(program);
+                        StudentVO studentVO = new StudentVO(name, identification, phone, email, addressVO, programVO);                        
+                        
+                        studentVO = service.newStudent(studentVO);
+                        request.setAttribute("student", studentVO);
+                        RequestDispatcher rd = request.getRequestDispatcher("view_student.jsp");
+                        rd.forward(request, response);                        
+                        break;
+                   case 2:
+                       Long id = new Long(request.getParameter("id"));
+                       studentVO = service.findStudent(id);
+                       if(studentVO != null){                            
+                            request.setAttribute("student", studentVO);
+                            rd = request.getRequestDispatcher("view_student.jsp");
+                        }
+                        else{
+                           String message = "No existe el usuario";
+                            request.setAttribute("message", message);
+                            rd = request.getRequestDispatcher("page_message.jsp");
+                        }                    
+                       
+                       rd.forward(request, response);
+                       break;
+                   case 3:
+                        id = new Long(request.getParameter("id"));
+                        if(service.deleteStudent(id)){                            
+                             String message = "Estudiante eliminado correctamente";
+                             request.setAttribute("message", message);                             
+                         }
+                         else{                            
+                             String message = "El estudiante no se eliminó";
+                             request.setAttribute("message", message);
+                         } 
+                        
+                        rd = request.getRequestDispatcher("page_message.jsp");
+                        rd.forward(request, response);
+                       break;
+                       case 4:
+                            id = new Long(request.getParameter("id"));
+                            Collection<StudentVO> studentsVO = service.findStudentByProgram(id);
+                            request.setAttribute("students", studentsVO);
+                            rd = request.getRequestDispatcher("table_students.jsp");
+                            rd.forward(request, response);
+                       break;
+                       case 5:
+                            id = new Long(request.getParameter("id"));
+                            studentsVO = service.findStudentByAddress(id);
+                            request.setAttribute("students", studentsVO);
+                            rd = request.getRequestDispatcher("table_students.jsp");
+                            rd.forward(request, response);
+                       break;
+                       case 6:
+                           id = new Long(request.getParameter("id"));
+                           studentVO = service.findStudent(id);
+                           addressVO = studentVO.getAddressVO();
+                           programVO = studentVO.getProgramVO();
+                           studentVO.setIdentification(request.getParameter("identification"));
+                           studentVO.setName(request.getParameter("studentName"));
+                           studentVO.setPhone(request.getParameter("phone"));
+                           studentVO.setEmail(request.getParameter("email"));
+                           addressVO.setCity(request.getParameter("city"));
+                           addressVO.setStreet(request.getParameter("street"));
+                           studentVO.setAddressVO(addressVO);
+                           programVO.setName(request.getParameter("programName"));
+                           studentVO.setProgramVO(programVO);
+                           service.updateStudent(studentVO);
+                           request.setAttribute("student", studentVO);
+                           rd = request.getRequestDispatcher("view_student.jsp");
+                           rd.forward(request, response);                            
+                       break;
+                       case 7 :
+                           String path = request.getParameter("path");
+                            if(service.uploadCsv(path , ",")){
+                                String message = "Archivo CSV ingresado correctamente";
+                                request.setAttribute("message", message);                                
+                            }
+                            else{
+                                String message = "El archivo no se subió";
+                                request.setAttribute("message", message);                                
+                            }
+                           
+                           rd = request.getRequestDispatcher("page_message.jsp");
+                           rd.forward(request, response);
+                       break;                       
+                }     
     }
+    
 
     /**
      * Returns a short description of the servlet.
